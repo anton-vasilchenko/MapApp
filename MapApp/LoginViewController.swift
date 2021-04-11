@@ -17,6 +17,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+        loginTextField.autocorrectionType = UITextAutocorrectionType.no
+        passwordTextField.autocorrectionType = UITextAutocorrectionType.no
     }
     @IBAction func signInPressed(_ sender: Any) {
         searchUser(login: loginTextField.text ?? "") { user in
