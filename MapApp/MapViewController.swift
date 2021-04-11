@@ -46,11 +46,7 @@ class MapViewController: UIViewController {
     
     @IBAction func endTrackTapped(_ sender: Any) {
         trackStatus = false
-        
-        try! realm.write {
-            realm.deleteAll()
-            realm.add(realmMarkers)
-        }
+    
         
         realmMarkers = []
     }

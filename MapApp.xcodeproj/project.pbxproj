@@ -16,6 +16,8 @@
 		3A9B8533261871220027F73C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B8532261871220027F73C /* MapViewController.swift */; };
 		3A9B8536261871260027F73C /* MapViewController+MapStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B8535261871260027F73C /* MapViewController+MapStyle.swift */; };
 		3AD025E32619F3CA00E0C8A7 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD025E22619F3CA00E0C8A7 /* Marker.swift */; };
+		3AD788EA26233DE600E1E62B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD788E926233DE600E1E62B /* User.swift */; };
+		3AD788ED26233F2400E1E62B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD788EC26233F2400E1E62B /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		3A9B8532261871220027F73C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3A9B8535261871260027F73C /* MapViewController+MapStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapViewController+MapStyle.swift"; sourceTree = "<group>"; };
 		3AD025E22619F3CA00E0C8A7 /* Marker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
+		3AD788E926233DE600E1E62B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3AD788EC26233F2400E1E62B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4E0A18980A4814775290B27C /* Pods_MapApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8E95DC12CB38E0D0749AE8 /* Pods-MapApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapApp.debug.xcconfig"; path = "Target Support Files/Pods-MapApp/Pods-MapApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D32A858DCEC16C8502EAEFF6 /* Pods-MapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapApp.release.xcconfig"; path = "Target Support Files/Pods-MapApp/Pods-MapApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 			children = (
 				3AD025DC2619F3A400E0C8A7 /* Entity */,
 				3A9B851C261870920027F73C /* AppDelegate.swift */,
+				3AD788EC26233F2400E1E62B /* LoginViewController.swift */,
 				3A9B851E261870920027F73C /* SceneDelegate.swift */,
 				3A9B8532261871220027F73C /* MapViewController.swift */,
 				3A9B8535261871260027F73C /* MapViewController+MapStyle.swift */,
@@ -93,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				3AD025E22619F3CA00E0C8A7 /* Marker.swift */,
+				3AD788E926233DE600E1E62B /* User.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -237,8 +243,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD788ED26233F2400E1E62B /* LoginViewController.swift in Sources */,
 				3A9B851D261870920027F73C /* AppDelegate.swift in Sources */,
 				3A9B851F261870920027F73C /* SceneDelegate.swift in Sources */,
+				3AD788EA26233DE600E1E62B /* User.swift in Sources */,
 				3A9B8536261871260027F73C /* MapViewController+MapStyle.swift in Sources */,
 				3A9B8533261871220027F73C /* MapViewController.swift in Sources */,
 				3AD025E32619F3CA00E0C8A7 /* Marker.swift in Sources */,
