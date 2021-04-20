@@ -9,12 +9,13 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import RealmSwift
+import RxCocoa
+import RxSwift
 
 class MapViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     var marker: GMSMarker?
     var manualMarker: GMSMarker?
-    var locationManager: CLLocationManager?
     let geocoder = CLGeocoder()
     let realm = try! Realm()
     var trackStatus = false
@@ -23,32 +24,36 @@ class MapViewController: UIViewController {
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     
+    let locationManager = LocationManager.instance
+    let disposeBag = DisposeBag()
+    
     var centerMapCoordinate:CLLocationCoordinate2D!
     
     
     let coordinates = CLLocationCoordinate2D(latitude: 59.939095, longitude: 30.315868)
     
-    @IBAction func updateLocation(_ sender: Any) {
-        trackStatus = true
-        mapView.clear()
-        updateUserLocation()
-    }
-    
     @IBAction func currentLocation(_ sender: Any) {
-        locationManager?.requestLocation()
+        locationManager.requestLocation()
     }
     
     @IBAction func startTrackTapped(_ sender: Any) {
         trackStatus = true
         mapView.clear()
         updateUserLocation()
+        locationManager.startUpdateingLocation()
     }
     
     @IBAction func endTrackTapped(_ sender: Any) {
         trackStatus = false
-    
+        
+        let oldMarkers = realm.objects(Marker.self)
+        try! realm.write {
+            realm.delete(oldMarkers)
+            realm.add(realmMarkers)
+        }
         
         realmMarkers = []
+        locationManager.stopUpdatingLocation()
     }
     
     @IBAction func showTrack (_ sender: Any) {
@@ -89,7 +94,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         configureMap()
         configureLocationManager()
-        locationManager?.requestLocation()
+        locationManager.requestLocation()
         print(realm.configuration.fileURL!)
     }
     
@@ -98,36 +103,44 @@ class MapViewController: UIViewController {
         route = GMSPolyline()
         routePath = GMSMutablePath()
         route?.map = mapView
-        locationManager?.startUpdatingLocation()
+        locationManager.startUpdateingLocation()
     }
     
-    
     func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestAlwaysAuthorization()
+        _ = locationManager
+            .location
+            .asObservable()
+            .bind { [weak self] location in
+                guard let location = location else { return }
+                self?.routePath?.add(location.coordinate)
+                self?.route?.path = self?.routePath
+                self?.placeMarkerOnCenter(position: location.coordinate)
+                self?.configureMap()
+                
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+                self?.mapView.animate(to: position)
+            }
     }
     
     func configureMap() {
         let camera = GMSCameraPosition.camera(withTarget: coordinates, zoom: 17)
         mapView.camera = camera
-        mapView.delegate = self
         configureMapStyle()
     }
     
     
-    func placeMarkerOnCenter(centerMapCoordinate: CLLocationCoordinate2D) {
+    func placeMarkerOnCenter(position: CLLocationCoordinate2D) {
         if trackStatus == true {
             let date = Date()
             let formatter = DateFormatter()
             let marker = GMSMarker()
             formatter.dateFormat = "dd.MM.yyyy HH:MM"
-            marker.position = centerMapCoordinate
+            marker.position = position
             marker.map = mapView
+            mapView.animate(toLocation: position)
             let realmMarker = Marker()
-            realmMarker.latitude = centerMapCoordinate.latitude
-            realmMarker.longitude = centerMapCoordinate.longitude
+            realmMarker.latitude = position.latitude
+            realmMarker.longitude = position.longitude
             realmMarker.created = date
             realmMarkers.append(realmMarker)
         }
@@ -147,25 +160,3 @@ extension MapViewController: GMSMapViewDelegate {
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        routePath?.add(location.coordinate)
-        route?.path = routePath
-        //        print(location)
-        updateUserLocation()
-        
-        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
-        mapView.animate(to: position)
-    }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        let latitude = mapView.camera.target.latitude
-        let longitude = mapView.camera.target.longitude
-        centerMapCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        self.placeMarkerOnCenter(centerMapCoordinate: centerMapCoordinate)
-    }
-}

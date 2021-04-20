@@ -76,6 +76,7 @@
                     <connections>
                         <outlet property="loginTextField" destination="uxp-Nk-j94" id="3Wd-5p-joh"/>
                         <outlet property="passwordTextField" destination="apI-BP-15c" id="MD3-uv-es9"/>
+                        <outlet property="signInButton" destination="eAb-o8-wjt" id="cBa-fe-C4G"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="signInSegue" id="kdg-Bg-A8y"/>
                     </connections>
                 </viewController>
@@ -153,17 +154,17 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="VOG-dG-esU">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="7GG-ZP-j51">
+                        <barButtonItem key="leftBarButtonItem" id="7GG-ZP-j51">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="yih-9v-xns">
                                 <rect key="frame" x="20" y="7" width="101" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Track Location"/>
                                 <connections>
-                                    <action selector="updateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aPG-1G-GyP"/>
+                                    <action selector="startTrackTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AlZ-fh-FQ0"/>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="zQa-a7-anH">
+                        <barButtonItem key="rightBarButtonItem" id="zQa-a7-anH">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="0ow-0j-vTo">
                                 <rect key="frame" x="279" y="7" width="115" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

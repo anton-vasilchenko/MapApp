@@ -7,17 +7,22 @@
 
 import UIKit
 import RealmSwift
+import RxCocoa
+import RxSwift
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
     let realm = try! Realm()
     var user: User?
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        print(Realm.Configuration.defaultConfiguration.fileURL as Any)
         
+        configureLoginBindings()
         loginTextField.autocorrectionType = UITextAutocorrectionType.no
         passwordTextField.autocorrectionType = UITextAutocorrectionType.no
     }
@@ -62,6 +67,18 @@ class LoginViewController: UIViewController {
                 
             }
         }
+    }
+    
+    func configureLoginBindings () {
+        Observable
+            .combineLatest(loginTextField.rx.text, passwordTextField.rx.text)
+            .map { (login, password) in
+                return !(login ?? "").isEmpty && (password ?? "").count >= 6
+            }
+            .bind { [weak signInButton] inputFilled in
+                signInButton?.isEnabled = inputFilled
+            }
+            .disposed(by: disposeBag)
     }
     
     func searchUser(login: String, completion: @escaping((User?) -> Void)) {

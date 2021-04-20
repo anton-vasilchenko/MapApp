@@ -8,5 +8,7 @@ target 'MapApp' do
   # Pods for MapApp
 pod 'GoogleMaps'
 pod 'RealmSwift', '=10.1.4'
+pod 'RxSwift'
+pod 'RxCocoa'
 
 end

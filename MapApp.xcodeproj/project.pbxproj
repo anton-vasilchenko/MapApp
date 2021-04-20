@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3626EADF23108F2C8F747731 /* Pods_MapApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E0A18980A4814775290B27C /* Pods_MapApp.framework */; };
+		3A627AD4262EA68200954D6C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A627AD3262EA68200954D6C /* LocationManager.swift */; };
 		3A9B851D261870920027F73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B851C261870920027F73C /* AppDelegate.swift */; };
 		3A9B851F261870920027F73C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B851E261870920027F73C /* SceneDelegate.swift */; };
 		3A9B8524261870930027F73C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B8522261870930027F73C /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A627AD3262EA68200954D6C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3A9B8519261870920027F73C /* MapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9B851C261870920027F73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A9B851E261870920027F73C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				3AD025DC2619F3A400E0C8A7 /* Entity */,
 				3A9B851C261870920027F73C /* AppDelegate.swift */,
 				3AD788EC26233F2400E1E62B /* LoginViewController.swift */,
+				3A627AD3262EA68200954D6C /* LocationManager.swift */,
 				3A9B851E261870920027F73C /* SceneDelegate.swift */,
 				3A9B8532261871220027F73C /* MapViewController.swift */,
 				3A9B8535261871260027F73C /* MapViewController+MapStyle.swift */,
@@ -247,6 +250,7 @@
 				3A9B851D261870920027F73C /* AppDelegate.swift in Sources */,
 				3A9B851F261870920027F73C /* SceneDelegate.swift in Sources */,
 				3AD788EA26233DE600E1E62B /* User.swift in Sources */,
+				3A627AD4262EA68200954D6C /* LocationManager.swift in Sources */,
 				3A9B8536261871260027F73C /* MapViewController+MapStyle.swift in Sources */,
 				3A9B8533261871220027F73C /* MapViewController.swift in Sources */,
 				3AD025E32619F3CA00E0C8A7 /* Marker.swift in Sources */,
