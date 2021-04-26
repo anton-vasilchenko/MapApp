@@ -11,13 +11,45 @@ import GoogleMaps
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+        
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBvnW910Ao-zUlqLR9XM_TYh6KAcPaXYqI")
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            guard granted else {
+                print("Access not granted")
+                return
+            }
+            self.sendNotificationRequest(content: self.makeNotificationContent(), trigger: self.makeIntervalNotificationTrigger())
+        }
+        
         return true
+    }
+    
+    func sendNotificationRequest(content: UNNotificationContent, trigger: UNNotificationTrigger) {
+        let request = UNNotificationRequest(identifier: "alarm", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func makeNotificationContent() -> UNNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = "MapsApp"
+        content.subtitle = "Return to app"
+        content.body = "Please, use our app again"
+        content.badge = 4
+        return content
+    }
+    
+    func makeIntervalNotificationTrigger() -> UNNotificationTrigger {
+        return UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
     }
 
     // MARK: UISceneSession Lifecycle
